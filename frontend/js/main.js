@@ -76,14 +76,7 @@ const displayRecipes = (recipes) => {
 // CONFIGURATION DES EVENT LISTENERS
 // ============================================
 
-const setupEventListeners = () => {
-	// Event listener pour le formulaire d'ajout de recette
-	const addRecipeForm = document.getElementById("addRecipeForm")
 
-	if (addRecipeForm) {
-		addRecipeForm.addEventListener("submit", handleAddRecipe)
-	}
-}
 
 // ============================================
 // AJOUTER UNE NOUVELLE RECETTE
@@ -91,7 +84,7 @@ const setupEventListeners = () => {
 // TODO: Compléter cette fonction pour gérer l'ajout d'une recette
 // Cette fonction est appelée quand l'utilisateur soumet le formulaire dans le modal
 
-const handleAddRecipe = async (event) => {
+export const handleAddRecipe = async (event) => {
 	// TODO 1: Empêcher le rechargement de la page
 	// Conseil: utilisez event.preventDefault()
 
