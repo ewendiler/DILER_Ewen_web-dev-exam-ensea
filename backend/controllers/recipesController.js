@@ -65,11 +65,23 @@ export const getRecipeById = (req, res) => {
 // 5. Renvoyer la recette créée avec le status 201 (Created)
 
 export const createRecipe = (req, res) => {
-	try {
-		// Votre code ici
-	} catch (error) {
-		res.status(500).json({ error: error.message })
-	}
+    try {
+        // Lire toutes les recettes existantes
+        const recipes = readRecipes(recipesPath)
+
+        // Créer un nouvel objet recette
+        // On génère l'ID et on copie tout le contenu reçu (req.body)
+        const newRecipe = {
+            id: Date.now(), 
+            ...req.body
+        }
+
+        recipes.push(newRecipe)
+        writeRecipes(recipes, recipesPath)
+        res.status(201).json(newRecipe)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
 }
 
 // ============================================
@@ -87,11 +99,21 @@ export const createRecipe = (req, res) => {
 // 7. Renvoyer la recette mise à jour
 
 export const updateRecipe = (req, res) => {
-	try {
-		// Votre code ici
-	} catch (error) {
-		res.status(500).json({ error: error.message })
-	}
+    try {
+        const recipes = readRecipes(recipesPath)
+        const id = parseInt(req.params.id)
+        const index = recipes.findIndex((r) => r.id === id)
+ 
+        if (index !== -1) {
+            recipes[index] = { ...recipes[index], ...req.body, id: id }
+            writeRecipes(recipes, recipesPath)
+            res.json(recipes[index])
+        } else {
+            res.status(404).json({ message: "Recipe not found" })
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
 }
 
 // ============================================
