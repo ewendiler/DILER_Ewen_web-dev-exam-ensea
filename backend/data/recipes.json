@@ -1,26 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Ratatouille Provençale",
-    "cuisine": "Française",
-    "difficulty": "Moyen",
-    "prepTime": 45,
-    "servings": 4,
-    "ingredients": [
-      "2 aubergines",
-      "2 courgettes",
-      "2 poivrons rouges",
-      "4 tomates",
-      "1 oignon",
-      "3 gousses d'ail",
-      "Huile d'olive",
-      "Herbes de Provence",
-      "Sel et poivre"
-    ],
-    "instructions": "Couper tous les légumes en dés. Faire revenir l'oignon et l'ail dans l'huile d'olive. Ajouter les aubergines, puis les courgettes, les poivrons et enfin les tomates. Assaisonner avec les herbes de Provence, sel et poivre. Laisser mijoter 30 minutes à feu doux.",
-    "image": "https://images.pexels.com/photos/5190684/pexels-photo-5190684.jpeg"
-  },
-  {
     "id": 2,
     "name": "Quiche Lorraine",
     "cuisine": "Française",

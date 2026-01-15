@@ -130,11 +130,21 @@ export const updateRecipe = (req, res) => {
 //    Exemple: { message: "Recette supprimée avec succès" }
 
 export const deleteRecipe = (req, res) => {
-	try {
-		// Votre code ici
-	} catch (error) {
-		res.status(500).json({ error: error.message })
-	}
+    try {
+        const recipes = readRecipes(recipesPath)
+        const id = parseInt(req.params.id)
+        const index = recipes.findIndex((r) => r.id === id)
+        if (index !== -1) {
+            const newRecipes = recipes.filter((r) => r.id !== id)
+            writeRecipes(newRecipes, recipesPath)
+            res.status(200).json({ message: "Recette supprimée avec succès" })
+        } else {
+
+            res.status(404).json({ message: "Recipe not found" })
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
 }
 
 // ============================================
@@ -150,9 +160,19 @@ export const deleteRecipe = (req, res) => {
 // 5. Renvoyer les recettes filtrées
 
 export const searchRecipes = (req, res) => {
-	try {
-		// Votre code ici (BONUS)
-	} catch (error) {
-		res.status(500).json({ error: error.message })
-	}
+    try {
+        const { search } = req.query
+        const recipes = readRecipes(recipesPath)
+        if (search) {
+            const filteredRecipes = recipes.filter((r) =>
+                r.name.toLowerCase().includes(search.toLowerCase())
+            )
+            res.json(filteredRecipes)
+        } else {
+            res.json(recipes)
+        }
+		
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
 }
