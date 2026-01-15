@@ -29,11 +29,25 @@ export const getRecipes = (req, res) => {
 // 5. Si la recette n'existe pas: renvoyer une erreur 404 avec res.status(404).json()
 
 export const getRecipeById = (req, res) => {
-	try {
-		// Votre code ici
-	} catch (error) {
-		res.status(500).json({ error: error.message })
-	}
+    try {
+        // Lire toutes les recettes
+        const recipes = readRecipes(recipesPath)
+
+        // Récupérer l'id depuis req.params.id et convertir en nombre
+        // Il est important de convertir car "1" !== 1
+        const id = parseInt(req.params.id)
+
+        // Chercher la recette avec Array.find()
+        const recipe = recipes.find(r => r.id === id)
+        if (recipe) {
+            res.json(recipe)
+        } 
+        else {
+            res.status(404).json({ message: "Recette non trouvée" })
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
 }
 
 // ============================================
