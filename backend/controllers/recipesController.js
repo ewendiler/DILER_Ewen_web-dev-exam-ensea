@@ -3,6 +3,8 @@ import { readRecipes, writeRecipes } from "../helpers/index.js"
 
 const recipesPath = path.resolve("./data/recipes.json")
 
+
+
 // ============================================
 // GET ALL RECIPES
 // ============================================
@@ -34,7 +36,6 @@ export const getRecipeById = (req, res) => {
         const recipes = readRecipes(recipesPath)
 
         // Récupérer l'id depuis req.params.id et convertir en nombre
-        // Il est important de convertir car "1" !== 1
         const id = parseInt(req.params.id)
 
         // Chercher la recette avec Array.find()
